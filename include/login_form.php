@@ -10,12 +10,6 @@
 	<script type="text/javascript" src="lib/prototype.js"></script>
 	<script type="text/javascript" src="js/functions.js"></script>
 	<script type="text/javascript" charset="utf-8" src="errors.php?mode=js"></script>
-	<script type="text/javascript">
-		require({cache:{}});
-		Event.observe(window, 'load', function() {
-			init();
-		});
-	</script>
 	<style type="text/css">
 	body#ttrssLogin {
 		padding : 2em;
@@ -103,21 +97,20 @@
 <body id="ttrssLogin" class="claro">
 
 <script type="text/javascript">
-function init() {
 
-	require(['dojo/parser','dijit/form/Button','dijit/form/CheckBox','dijit/form/Form',
-    	'dijit/form/Select','dijit/form/TextBox','dijit/form/ValidationTextBox'],function(parser){
-    		parser.parse();
-    		//show tooltip node only after this widget is instaniated. 
-    		dojo.query('div[dojoType="dijit.Tooltip"]').style({
-    			display:''
-    		});
+require(['dojo/parser','dijit/form/Button','dijit/form/CheckBox','dijit/form/Form',
+	'dijit/form/Select','dijit/form/TextBox','dijit/form/ValidationTextBox','dojo/domReady!'],
+	function(parser){
+		parser.parse();
+		//show tooltip node only after this widget is instantiated. 
+		dojo.query('div[dojoType="dijit.Tooltip"]').style({
+			display:''
+		});
 		fetchProfiles();
 		dijit.byId("bw_limit").attr("checked", getCookie("ttrss_bwlimit") == 'true');
 		document.forms.loginForm.login.focus();
-    	});	
+});	
 
-}
 
 function fetchProfiles() {
 	try {
